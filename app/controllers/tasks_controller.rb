@@ -21,10 +21,11 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/new
-  # GET /tasks/new.json
+  # GET project/1/tasks/new
+  # GET project/1/tasks/new.json
   def new
-    @task = Task.new
+    @project = Project.find(params[:project_id])
+    @task =  @project.tasks.build #Task.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,15 +41,16 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(params[:task])
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.build(params[:task])# Task.new(params[:task])
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render json: @task, status: :created, location: @task }
+        format.html { redirect_to @project, notice: 'Task was successfully created.' }
+        format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end

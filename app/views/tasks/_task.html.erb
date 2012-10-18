@@ -1,0 +1,1 @@
+<li><span><%= link_to task.name, project_task_path(@project, task) %></span> <span class="label label-important"><%= task.user.name  unless task.user.nil?  %> </span>  </li>

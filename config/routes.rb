@@ -1,9 +1,11 @@
 Administrador::Application.routes.draw do
-  resources :tasks
+  
 
   resources :users
 
-  resources :projects
+  resources :projects do
+    resources :tasks
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
